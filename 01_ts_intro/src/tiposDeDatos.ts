@@ -168,6 +168,16 @@ enum Color {
     Azul = 'AZUL'
 }
 
+const UserStatus = {
+    Active: 'ACTIVE',
+    Inactive: 'INACTIVE',
+    Pending: 'PENDING'
+} as const;
+
+type UserStatus = (typeof UserStatus)[keyof typeof UserStatus];
+
+UserStatus.Active;
+
 /* GENERICS */
 function identity<T>(arg: T): T {
     return arg;
