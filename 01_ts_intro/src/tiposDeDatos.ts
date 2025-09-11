@@ -461,5 +461,28 @@ function makeSoundSwitch(animal: Cat | Dog | Duck) {
     }
 }
 
-
 /* TIPOS ADICIONALES */
+interface Documento{
+    titulo: string,
+    contenido: string,
+    comienzo: Date,
+    final: Date
+}
+
+function getSemaphoreColor (documento: Documento): string{
+    const tiempo = documento.final.getDate() - documento.comienzo.getDate();
+    if(tiempo <= 24){
+        return "green";
+    }else if(tiempo <= 48){
+        return "yellow";
+    }
+    return "red";
+}
+
+/* MAS LEGIBLE TEST */
+function getSemaphoreColorNew (documento: Documento): string{
+    const tiempo = documento.final.getDate() - documento.comienzo.getDate();
+    if(tiempo > 0 && tiempo <= 48) return "green";
+    else if(tiempo > 48 && tiempo <= 72) return "yellow";
+    return "red";
+}
