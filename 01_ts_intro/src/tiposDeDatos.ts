@@ -194,3 +194,79 @@ function getArrayItem<T>(arg: T[], index: number): T {
 }
 
 getArrayItem(nombres, 0);
+
+/* IDENTITY */
+const result = identity<string>('Hola');
+const result2 = identity<number>(5);
+
+function loggingIdentity<T extends {length : number}>(arg: T): T {
+    console.log(arg.length);
+    return arg;
+}
+
+/* RECORD similar a los objetos clave => valor*/
+type Flags = "DarkMode" | "CalendarNewVersion";
+type FeatureFlags = Record<Flags, boolean>;
+
+const config: FeatureFlags = {
+    DarkMode: true,
+    CalendarNewVersion: false
+};
+
+/* READONLY solo se puede consultar no va a cambiar*/
+type UserReadonly = {
+    id: string,
+    name: string,
+    email: string,
+    age: number
+};
+
+type UserProfileReadOnly = Readonly<UserReadonly>;
+
+const userReadOnly: UserProfileReadOnly = {
+    id: '1',
+    name: 'John Doe',
+    email: 'example@gmaill.com',
+    age: 30
+}
+
+/* PROMESAS */
+type PromiseType = Promise<string>;
+
+type ResultType = Awaited<PromiseType>;
+
+/* PARTIAL va completando las tareas vamos cambiando el valor */
+type Tasks = {
+    cook: boolean,
+    clean: boolean,
+    shop: boolean
+}
+
+type PartialTasks = Partial<Tasks>;
+
+const taskToDo: PartialTasks = {
+    cook: true
+}
+
+/* OMIT & PICK */
+
+interface AdminUser {
+    name: string;
+    email: string;
+    password: string;
+    adress: string;
+    phone: string;
+}
+
+/* Sirve para DTOS omitimos datos sensibles */
+type SafeUser = Omit<AdminUser, 'password' | 'adress' | 'phone'>;
+
+/* Sirve para DTOS seleccionamos solo los datos que queremos */
+type ContactInfo = Pick<AdminUser, 'email' | 'phone'>;
+
+/* EXCLUDE */
+type T0 = Exclude<"a" | "b" | "c", "a">;
+// Quita "a" → queda "b" | "c"
+
+type T1 = Exclude<"a" | "b" | "c", "a" | "b">;
+// Quita "a" y "b" → queda "c"
