@@ -1,0 +1,20 @@
+{
+  "name": "04_katas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "vitest"
+  },
+  "author": "Maximiliano Soriano",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.5.0",
+    "@vitest/ui": "^3.2.4",
+    "typescript": "^5.9.2",
+    "vite": "^6.3.6",
+    "vitest": "^3.2.4"
+  }
+}
