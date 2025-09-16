@@ -65,3 +65,13 @@ const examenMatematicas : Category<number> = {
         }
     ]
 }*/
+
+//INFER
+
+type MyCorrectResponse<T> = T extends () => infer A ? A : never;
+
+type MyFunction = () => string | Error;
+
+const correctResult: MyCorrectResponse<MyFunction> = "hola"; // ✅ string
+const anotherResult: MyCorrectResponse<MyFunction> = new Error("ups"); // ✅ Error
+//const correctResultError: MyCorrectResponse<MyFunction> = 45;
