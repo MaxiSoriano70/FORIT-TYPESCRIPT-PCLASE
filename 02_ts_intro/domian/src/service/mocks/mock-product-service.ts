@@ -25,13 +25,12 @@ export class MockProductService implements ProductService {
         throw new Error("Product not found");
     }
 
-    async deleteById(id: string): Promise<void> {
-        this.products = this.products.filter(p => p.id !== id);
+    async save(data: Product): Promise<void> {
+        this.products.push(data);
     }
 
-    async create(data: Product): Promise<Product> {
-        this.products.push(data);
-        return data;
+    async deleteById(id: string): Promise<void> {
+        this.products = this.products.filter(p => p.id !== id);
     }
 
     async getProductsWhithDescount(): Promise<Product[]> {
