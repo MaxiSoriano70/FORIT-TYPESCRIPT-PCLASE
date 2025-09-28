@@ -2,7 +2,6 @@ import { describe, expect, test } from "vitest";
 import { register } from "./register-user.js";
 import type { UserService } from "../../service/user-service.js";
 import { UserStatus, type User } from "../../entities/user.js";
-import { th } from "@faker-js/faker";
 
 describe("register", () => {
     const userList: User[] = [
@@ -40,7 +39,7 @@ describe("register", () => {
         },
     };
 
-    test("Al recibir la información de un usuario deberia registrarse", async () => {
+    test("When receiving information from a user you must register", async () => {
         const result = await register(
             { userService },
             {
@@ -63,7 +62,7 @@ describe("register", () => {
         expect(userList).toHaveLength(2);
     });
 
-    test("Si el email ya esta registrado deberia devolver un error", async () => {
+    test("If the email is already registered, it should return an error.", async () => {
         const result = await register(
             { userService },
             {

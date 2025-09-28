@@ -42,11 +42,11 @@ describe("Create Product", () => {
 
     const emailService = {
         notifyNewProduct: async (name: string, emails: string[]) => {
-            console.log("Notificando:", name, emails);
+            console.log("Notifying:", name, emails);
         }
     };
 
-    test("Al recibir informacionde un producto, deberia guardarlo y una vez guardado deberia notificar a los usuarios", async () => {
+    test("When receiving information about a product, it should be saved and once saved, users should be notified.", async () => {
         await addProductAndNotify(
             { productService, emailService, userService },
             {
