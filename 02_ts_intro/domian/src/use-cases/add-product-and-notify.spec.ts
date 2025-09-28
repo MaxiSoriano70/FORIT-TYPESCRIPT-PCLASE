@@ -1,13 +1,13 @@
 import { describe, expect, test } from "vitest";
 import { MockProductService } from "../service/mocks/mock-product-service.js";
-import { Product } from "./aP.js";
+import { addProductAndNotify } from "./add-product-and-notify.js";
 import { UserStatus, type User } from "../entities/user.js";
 import type { UserService } from "../service/user-service.js";
 
-describe("Create Product", async () => {
-    const pService = new MockProductService([]);
+describe("Create Product", () => {
+    const productService = new MockProductService([]);
 
-    const userList: User[] =[{
+    const userList: User[] = [{
         id: crypto.randomUUID(),
         name: "user",
         surname: "surname",
@@ -16,12 +16,12 @@ describe("Create Product", async () => {
         status: UserStatus.ACTIVE
     }];
 
-    const uS: UserService = {
+    const userService: UserService = {
         findById: async (id: string) => {
             throw "error";
         },
         findAll: async () => {
-            throw "error";
+            return userList;
         },
         editOne: async (data: User) => {
             throw "error";
@@ -40,21 +40,22 @@ describe("Create Product", async () => {
         },
     };
 
-    const eService = {
-        senp: async (n: string, e: string[]) => {
-            console.log(n);
-            console.log(e);
+    const emailService = {
+        notifyNewProduct: async (name: string, emails: string[]) => {
+            console.log("Notificando:", name, emails);
         }
     };
 
-    test("", async () => {
-        const r = await Product(
-            { pService, eService, uS},
+    test("Al recibir informacionde un producto, deberia guardarlo y una vez guardado deberia notificar a los usuarios", async () => {
+        await addProductAndNotify(
+            { productService, emailService, userService },
             {
-                n: "test",
-                p: 100,
+                name: "test",
+                price: 100
             }
-        )
-        expect(pService.findAll).toHaveLength(1);
+        );
+
+        const allProducts = await productService.findAll();
+        expect(allProducts).toHaveLength(1);
     });
-})
+});
