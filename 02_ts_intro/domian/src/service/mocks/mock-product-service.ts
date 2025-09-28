@@ -1,7 +1,7 @@
 import type { Product } from "../../entities/product.js";
 import type { ProductService } from "../product-service.js";
 
-export class MockProductService implements ProductService {
+export class MockedProductService implements ProductService {
     products: Product[] = [];
 
     constructor(products: Product[]) {

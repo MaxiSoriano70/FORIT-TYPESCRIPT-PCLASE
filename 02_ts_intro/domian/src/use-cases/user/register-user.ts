@@ -16,8 +16,10 @@ export async function register(
     { userService }: RegisterDeps,
     { email, name, surname, password }: RegisterPayload
 ) {
-    const  foundUser = await userService.findByEmail(email);
-    if ( foundUser) throw new Error("User already exists");
+    const foundUser = await userService.findByEmail(email);
+    if (foundUser) {
+        throw new Error("User already exists");
+    }
 
     await userService.save({
         id: crypto.randomUUID(),
