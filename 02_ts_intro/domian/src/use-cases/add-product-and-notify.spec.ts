@@ -1,4 +1,4 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { MockedProductService } from "../service/mocks/mock-product-service.js";
 import { addProductAndNotify } from "./add-product-and-notify.js";
 import { MockedUserService } from "../service/mocks/mock-user-service.js";
@@ -13,11 +13,17 @@ describe("Create Product", () => {
         userMock()
     ]);
 
+    let emailsNotified: string[] = [];
+
     const emailService = {
         notifyNewProduct: async (name: string, emails: string[]) => {
-            console.log("Notifying:", name, emails);
+            console.log("Notifying:", name);
+            emailsNotified = emails;
         }
     };
+
+    /* ESPIA QUE CONTROLA EL EVENTO */
+    const spyOnNotifyNewProduct = vi.spyOn(emailService, "notifyNewProduct");
 
     test("When receiving information about a product, it should be saved and once saved, users should be notified.", async () => {
         await addProductAndNotify(
@@ -30,5 +36,8 @@ describe("Create Product", () => {
 
         const allProducts = await productService.findAll();
         expect(allProducts).toHaveLength(1);
+        expect(emailsNotified).toHaveLength(3);
+        /* CHEQUEAMOS CUANTAS VECES FUE LLAMADO EL METODO */
+        expect(spyOnNotifyNewProduct).toHaveBeenCalledTimes(1);
     });
 });
