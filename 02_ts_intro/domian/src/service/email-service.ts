@@ -1,3 +1,3 @@
 export interface EmailService{
-    notifyNewProduct: (name: string, email: string[]) => Promise<void>
+    notifyNewProduct: (name: string, emails: string[]) => Promise<void>;
 }
