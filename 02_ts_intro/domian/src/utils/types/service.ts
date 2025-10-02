@@ -1,6 +1,6 @@
 import type { Entity } from "../types/entity.js";
 
-export interface Service<T extends Entity> extends ServiceQuery<Entity>, ServiceStorage<Entity>{}
+export interface Service<T extends Entity> extends ServiceQuery<T>, ServiceStorage<T>{}
 
 /* SEPARAR SERVICE QUE HACEB CANBIOS EN LA DB CON SERVICE QUE NO HACEN CAMBIOS EN LA DB */
 interface ServiceQuery<T extends Entity> {

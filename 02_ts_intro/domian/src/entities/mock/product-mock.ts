@@ -6,6 +6,7 @@ export function productMock(opts?: Partial<Product>): Product{
         id: faker.string.uuid(),
         name: faker.commerce.product(),
         price: faker.number.int({max: 100000, min: 5000}),
+        categoryId: faker.commerce.productDescription(),
         ...opts
     }
 }

@@ -20,7 +20,7 @@ export class MockedUserService implements UserService {
         const index = this.users.findIndex(u => u.id === user.id);
         if (index === -1) throw new Error("User not found");
         this.users[index] = user;
-        return user; // ⚠ Devuelve siempre User, nunca undefined
+        return user;
     }
 
     save = async (user: User): Promise<void> => {
