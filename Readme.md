@@ -6,3 +6,4 @@
 06. Clase 06 Typescript - Codigo limpio - Flata el Back End 18/09/2025
 07. Clase 07 Arquitectura Limpia 23/09/2025
 08. Clase 08 Repaso 25/09/2025
+09. Clase 09 Arquitectura Limpia 30/09/2025
